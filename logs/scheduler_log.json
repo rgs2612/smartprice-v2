@@ -1,0 +1,42 @@
+[
+  {
+    "product": "Nothing Pixel 8",
+    "new_price": 35588,
+    "reason": "Brand positioning",
+    "expires_on": "2025-08-02 17:08:12"
+  },
+  {
+    "product": "Nothing Pixel 8",
+    "new_price": 35588,
+    "reason": "Brand positioning",
+    "expires_on": "2025-08-02 17:14:20"
+  },
+  {
+    "product": "Nothing Pixel 8",
+    "new_price": 35502,
+    "reason": "Brand positioning",
+    "scheduled_for": "2025-08-02 13:21:27",
+    "expires_on": "2025-08-03 17:21:27"
+  },
+  {
+    "product": "Nothing Pixel 8",
+    "new_price": 35502,
+    "reason": "Brand positioning",
+    "scheduled_for": "2025-08-02 13:23:46",
+    "expires_on": "2025-08-03 17:23:46"
+  },
+  {
+    "product": "Nothing Pixel 8",
+    "new_price": 35502,
+    "reason": "Brand positioning",
+    "scheduled_for": "2025-08-02 13:30:00",
+    "expires_on": "2025-08-03 17:29:00"
+  },
+  {
+    "product": "Nothing Pixel 8",
+    "new_price": 35500,
+    "reason": "Brand positioning",
+    "scheduled_for": "2025-08-02 13:31:00",
+    "expires_on": "2025-08-03 17:30:00"
+  }
+]

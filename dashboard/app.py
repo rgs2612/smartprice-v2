@@ -31,3 +31,14 @@ df = apply_overrides(df)
 
 st.subheader("📊 Price Overview")
 st.dataframe(df, use_container_width=True)
+
+from ai.demand_forecaster import train_demand_model
+from utils.data_loader import load_product_data
+
+# Sidebar trigger
+with st.sidebar:
+    st.markdown("## 🧠 AI Training Options")
+    if st.button("📈 Train Demand Forecast Model"):
+        df = load_product_data()
+        train_demand_model(df)
+        st.success("✅ Demand model trained and saved!")

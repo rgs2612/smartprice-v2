@@ -4,6 +4,8 @@
     "operator": "drops by",
     "value": 10.0,
     "action": "Match Competitor Price",
-    "action_value": null
+    "action_value": null,
+    "scheduled_for": "2025-08-02 15:54:27",
+    "expires_on": "2025-08-02 23:59:27"
   }
 ]

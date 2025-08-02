@@ -1,44 +1,57 @@
+# pages/Notifications.py
 import streamlit as st
 import pandas as pd
-from datetime import datetime, timedelta
-import random
+import os
+from utils.action_generator import generate_action
 
-st.title("🔔 Notification Center")
+st.set_page_config(page_title="Notifications", page_icon="🔔")
+st.title("📣 Smart Pricing Notifications")
+st.markdown("Real-time alerts generated from AI monitoring logic.")
 
-# --- Simulated notifications data ---
-types = ["Competitor Price Change", "Demand Spike", "Rule Triggered"]
-messages = [
-    "Amazon dropped price for Galaxy S23 by ₹2,000",
-    "High demand detected for iPhone 14 in Bangalore",
-    "Rule #2 triggered: Inventory < 10% on OnePlus 12",
-    "Flipkart matched your price on Pixel 8",
-    "Rule #3: Aggressive pricing applied for OnePlus Nord",
-    "Demand spike alert for Samsung A55"
-]
+# Load data
+data_path = "data/mock_product_data.xlsx"
+if not os.path.exists(data_path):
+    st.warning("Product data not found.")
+    st.stop()
 
-def generate_fake_notifications(n=10):
-    return pd.DataFrame({
-        "Time": [datetime.now() - timedelta(minutes=15 * i) for i in range(n)],
-        "Type": [random.choice(types) for _ in range(n)],
-        "Message": random.choices(messages, k=n)
-    })
+df = pd.read_excel(data_path)
 
-df = generate_fake_notifications(10)
+# Safe checks for missing columns
+required_cols = ["ProductName", "Stock Level", "Confidence Score", "Competitor Price", "Our Price"]
+for col in required_cols:
+    if col not in df.columns:
+        st.error(f"Missing required column: **{col}**")
+        st.stop()
 
-# --- Filters ---
-st.markdown("### 📍 Filter Notifications")
-selected_type = st.selectbox("Filter by Type", ["All"] + types)
+# Apply action logic
+df = generate_action(df)
 
-if selected_type != "All":
-    df = df[df["Type"] == selected_type]
+# Notification Sections
+st.subheader("🔻 Low Stock Alerts (< 5 units)")
+low_stock = df[df["Stock Level"] < 5]
+if not low_stock.empty:
+    st.error("The following products are critically low on stock:")
+    st.dataframe(low_stock[["ProductName", "Stock Level", "Action"]])
+else:
+    st.success("✅ All products have sufficient stock.")
 
-# --- Display Notifications ---
-st.markdown("### 📬 Recent Alerts")
-for _, row in df.iterrows():
-    with st.container():
-        st.markdown(f"🕒 {row['Time'].strftime('%Y-%m-%d %H:%M:%S')}")
-        st.markdown(f"**📌 {row['Type']}** — {row['Message']}")
-        st.markdown("---")
+st.subheader("⚠️ Price Gap Alerts (> ₹2000 difference)")
+price_gap = df[df["Price Gap"] > 2000]
+if not price_gap.empty:
+    st.warning("These products have a large price difference with competitors:")
+    st.dataframe(price_gap[["ProductName", "Competitor Price", "Our Price", "Price Gap", "Action"]])
+else:
+    st.success("✅ No large price mismatches detected.")
 
-# --- Export ---
-st.download_button("📤 Export Notifications", data=df.to_csv(index=False), file_name="notifications.csv")
+st.subheader("🤖 Low AI Confidence (< 70%)")
+low_confidence = df[df["Confidence Score"] < 0.70]
+if not low_confidence.empty:
+    st.info("These products have low model confidence. Manual review recommended:")
+    st.dataframe(low_confidence[["ProductName", "Confidence Score", "Action"]])
+else:
+    st.success("✅ All predictions have high confidence.")
+
+# Summary Badge
+st.markdown("---")
+st.markdown("✅ **Smart alerts help you stay ahead of risks and pricing mismatches.**")
+

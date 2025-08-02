@@ -1,73 +1,83 @@
 import streamlit as st
 import pandas as pd
-import json
-import os
-from datetime import datetime, timedelta
+from datetime import datetime
 
-SCHEDULE_FILE = "data/scheduled_changes.json"
+from utils.override_handler import load_scheduled_overrides, save_scheduled_overrides
+from utils.rules_override_handler import load_rule_scheduled_overrides, save_rule_scheduled_overrides
 
-# Load mock product data
-@st.cache_data
-def load_data():
-    return pd.read_excel("data/mock_product_data.xlsx")
+st.title("📅 One-Time AI Scheduler")
 
-def save_schedule(schedule):
-    os.makedirs("data", exist_ok=True)
-    if os.path.exists(SCHEDULE_FILE):
-        with open(SCHEDULE_FILE, "r") as f:
-            all_schedules = json.load(f)
-    else:
-        all_schedules = []
+# ----------------------
+# Manual Scheduled Overrides
+# ----------------------
+st.subheader("📋 Scheduled Manual Overrides")
+manual_overrides = load_scheduled_overrides()
 
-    all_schedules.append(schedule)
-    with open(SCHEDULE_FILE, "w") as f:
-        json.dump(all_schedules, f, indent=2)
-
-# UI
-st.title("📅 Price Scheduling")
-
-df = load_data()
-product_names = df['ProductName'].tolist()
-selected_product = st.selectbox("Select a Product", product_names)
-
-new_price = st.number_input("Enter New Price", min_value=1.0, step=1.0)
-
-# Select date and time separately
-schedule_date = st.date_input(
-    "Select Date",
-    min_value=datetime.today().date(),
-    value=datetime.today().date()
-)
-
-schedule_time = st.time_input(
-    "Select Time",
-    value=(datetime.now() + timedelta(hours=1)).time()
-)
-
-# Combine to datetime
-schedule_datetime = datetime.combine(schedule_date, schedule_time)
-
-# Validate and save
-if schedule_datetime < datetime.now():
-    st.warning("⏰ Please select a future date and time.")
+if not manual_overrides:
+    st.info("No manual overrides scheduled.")
 else:
-    if st.button("📆 Schedule Price Change", key="schedule_btn"):
-        schedule = {
-            "product": selected_product,
-            "new_price": new_price,
-            "scheduled_for": schedule_datetime.strftime("%Y-%m-%d %H:%M:%S")
-        }
-        save_schedule(schedule)
-        st.success(f"✅ Scheduled price change for {selected_product} at {schedule_datetime}.")
+    df_manual = pd.DataFrame(manual_overrides)
+    st.dataframe(df_manual)
 
-# Display existing scheduled changes
-if os.path.exists(SCHEDULE_FILE):
-    with open(SCHEDULE_FILE, "r") as f:
-        existing = json.load(f)
-    if existing:
-        st.subheader("🕒 Scheduled Changes")
-        st.table(pd.DataFrame(existing))
-    else:
-        st.info("No scheduled changes yet.")
+# ----------------------
+# Rule-Based Scheduled Overrides
+# ----------------------
+st.subheader("⚙️ Scheduled Rule-Based Updates")
+rule_overrides = load_rule_scheduled_overrides()
+
+if not rule_overrides:
+    st.info("No rule-based scheduled updates.")
 else:
-    st.info("No schedule file found.")
+    try:
+        df_rules = pd.DataFrame(rule_overrides)
+
+        # Optional column reordering
+        display_cols = ["product", "new_price", "reason", "scheduled_for", "expires_on"]
+        if all(col in df_rules.columns for col in display_cols):
+            df_rules = df_rules[display_cols]
+
+        st.dataframe(df_rules)
+    except Exception as e:
+        st.error(f"⚠️ Failed to display rule overrides: {e}")
+        st.json(rule_overrides)  # fallback raw view
+
+# ----------------------
+# Run Scheduler Button
+# ----------------------
+st.markdown("### 🚀 Run Scheduler Now")
+
+if st.button("Run Scheduler Now"):
+    now = datetime.now()
+
+    # ✅ Filter & keep only *not yet active* or *future* manual overrides
+    updated_manual = []
+    for override in manual_overrides:
+        try:
+            start = datetime.strptime(override["scheduled_for"], "%Y-%m-%d %H:%M:%S")
+            end = datetime.strptime(override["expires_on"], "%Y-%m-%d %H:%M:%S")
+            if start <= now <= end:
+                st.success(f"✅ Manual Override applied for: {override['product']}")
+            else:
+                updated_manual.append(override)
+        except Exception as e:
+            st.warning(f"⚠️ Manual override error: {e}")
+
+    save_scheduled_overrides(updated_manual)
+
+    # ✅ Same logic for rule overrides
+    updated_rules = []
+    for override in rule_overrides:
+        try:
+            start = datetime.strptime(override["scheduled_for"], "%Y-%m-%d %H:%M:%S")
+            end = datetime.strptime(override["expires_on"], "%Y-%m-%d %H:%M:%S")
+            if start <= now <= end:
+                st.success(f"✅ Rule Override applied for: {override['product']}")
+            else:
+                updated_rules.append(override)
+        except Exception as e:
+            st.warning(f"⚠️ Rule override error: {e}")
+
+    save_rule_scheduled_overrides(updated_rules)
+
+    st.info("🔄 Scheduler run completed. Reloading...")
+    st.rerun()

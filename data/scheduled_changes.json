@@ -1,9 +1,10 @@
 [
-  {
-    "product": "Nothing Pixel 8",
-    "new_price": 35500,
-    "reason": "Brand positioning",
-    "scheduled_for": "2025-08-02 13:31:00",
-    "expires_on": "2025-08-03 17:30:00"
-  }
+    {
+        "product_id": "d7463517",
+        "product_name": "OnePlus 14",
+        "new_price": 45714,
+        "reason": "Brand positioning",
+        "scheduled_for": "2025-08-03 01:08:00",
+        "expires_on": "2025-08-04 05:08:00"
+    }
 ]

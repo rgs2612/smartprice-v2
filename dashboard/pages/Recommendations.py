@@ -1,94 +1,121 @@
 import streamlit as st
 import pandas as pd
 import joblib
-from datetime import datetime
+import os
+import json
 
 # File paths
 DATA_PATH = "data/mock_product_data.xlsx"
 MODEL_PATH = "ai/ai_price_model.pkl"
+AI_JSON_PATH = "data/ai_scheduled.json"
 
-st.title("🧠 AI Pricing Recommendations")
+st.set_page_config(page_title="🤖 AI Pricing Recommendations", layout="wide")
+st.title("🤖 AI Pricing Recommendations")
 
 # Load product data
-try:
-    df = pd.read_excel(DATA_PATH)
-except FileNotFoundError:
-    st.error("❌ Product data file not found.")
-    st.stop()
+df = pd.read_excel(DATA_PATH)
 
 # Load AI model
-try:
-    model = joblib.load(MODEL_PATH)
-except FileNotFoundError:
-    st.error("❌ AI model not trained yet. Please train it first.")
-    st.stop()
+model = joblib.load(MODEL_PATH)
 
-# Validate required columns
-required_cols = ["TrendScore", "Stock Level", "Demand", "Competitor Price"]
-missing = [col for col in required_cols if col not in df.columns]
-if missing:
-    st.error(f"Missing required columns: {missing}")
-    st.stop()
+# Predict AI Price & Confidence
+features = ["TrendScore", "Stock Level", "Demand", "Competitor Price"]
+df["AI Price"] = model.predict(df[features]).round(2)
+df["Confidence Score"] = (100 - abs(df["AI Price"] - df["Competitor Price"]) / df["Competitor Price"] * 100).round(2)
 
-# Predict AI prices
-features = df[required_cols]
-df["AI Price"] = model.predict(features)
-
-# Confidence Score
-df["Confidence Score"] = 100 - abs(df["AI Price"] - df["Competitor Price"]) / df["Competitor Price"] * 100
-df["Confidence Score"] = df["Confidence Score"].round(2)
-
-# Ensure required metadata columns
-if "Reason" not in df.columns:
-    df["Reason"] = None
-if "override_applied" not in df.columns:
-    df["override_applied"] = False
-if "Original Price" not in df.columns:
-    df["Original Price"] = df["Our Price"]  # Store original at first run
-
-# --- Show AI Suggestions ---
-st.markdown("### 🧠 Suggested Prices (AI Only)")
-st.dataframe(df[["ProductName", "Competitor Price", "AI Price", "Confidence Score", "Our Price", "Reason", "override_applied"]], use_container_width=True)
-
-# --- Manual Review & Actions ---
-st.markdown("### ✋ Manual Review & Actions")
-
-flagged = df[df["Confidence Score"] < 85]
-
-if not flagged.empty:
-    for i, row in flagged.iterrows():
-        with st.expander(f"🔍 {row['ProductName']} - {row['Confidence Score']}% confidence"):
-            st.write(f"- **Competitor Price:** ₹{row['Competitor Price']}")
-            st.write(f"- **AI Suggested Price:** ₹{row['AI Price']:.2f}")
-            st.write(f"- **Current Our Price:** ₹{row['Our Price']}")
-            st.write(f"- **Original Price:** ₹{row['Original Price'] if 'Original Price' in row else 'N/A'}")
-
-            col1, col2 = st.columns(2)
-
-            with col1:
-                if not row["override_applied"]:
-                    if st.button(f"✅ Apply AI Price - {row['ProductName']}", key=f"apply_{i}"):
-                        df.at[i, "Original Price"] = row["Our Price"]
-                        df.at[i, "Our Price"] = row["AI Price"]
-                        df.at[i, "Reason"] = "Manual AI Override"
-                        df.at[i, "override_applied"] = True
-                        try:
-                            df.to_excel(DATA_PATH, index=False)
-                            st.success(f"✅ Applied AI Price ₹{row['AI Price']:.2f} to {row['ProductName']}")
-                            st.rerun()
-                        except PermissionError:
-                            st.warning("⚠️ Excel file is open. Please close and try again.")
-            with col2:
-                if row["override_applied"]:
-                    if st.button(f"↩️ Revert Price - {row['ProductName']}", key=f"revert_{i}"):
-                        df.at[i, "Our Price"] = row["Original Price"]
-                        df.at[i, "Reason"] = "Reverted AI Override"
-                        df.at[i, "override_applied"] = False
-                        try:
-                            df.to_excel(DATA_PATH, index=False)
-                            st.success(f"↩️ Reverted to original price ₹{row['Original Price']} for {row['ProductName']}")
-                            st.rerun()
-                        except PermissionError:
-                            st.warning("⚠️ Cannot write to file. Please close the Excel file and try again.")
+# Load existing AI overrides
+if os.path.exists(AI_JSON_PATH):
+    with open(AI_JSON_PATH, "r") as f:
+        ai_overrides = json.load(f)
 else:
-    st.info("✅ No low-confidence products to manually review.")
+    ai_overrides = []
+
+# Mapping for fast lookup
+ai_override_map = {entry["product_id"]: entry for entry in ai_overrides}
+
+# Set override types
+df["OverrideType"] = df["ProductID"].apply(
+    lambda x: "AI Recommended" if x in ai_override_map else None
+)
+
+# Filter out products already overridden by Manual or Rule-Based (if needed)
+excluded_ids = set()
+# You can load manual/rule overrides and add to excluded_ids if needed
+
+# Filter: Only products not already manually or rule overridden
+filtered_df = df[~df["ProductID"].isin(excluded_ids)].copy()
+
+
+
+st.markdown("---")
+st.subheader("📋 AI Price Suggestions")
+
+# Placeholder for dynamic messages
+message_placeholder = st.empty()
+
+# Sticky controls
+col1, col2, col3 = st.columns(3)
+select_all = col1.checkbox("✅ Select All", key="select_all_ai")
+apply_clicked = col2.button("🚀 Apply Selected", key="apply_ai")
+revert_clicked = col3.button("↩️ Revert Selected", key="revert_ai")
+
+# State storage
+selected_ids = []
+
+# Show AI Recommendations
+for _, row in filtered_df.iterrows():
+    is_applied = row["ProductID"] in ai_override_map
+    bg_color = "#dcfce7" if is_applied else ("#fff3cd" if row["Confidence Score"] < 70 else "#e0f7fa")
+
+    with st.container():
+        cols = st.columns([0.07, 0.93])
+        checked = select_all or cols[0].checkbox("", key=f"chk_{row['ProductID']}")
+        if checked:
+            selected_ids.append(row["ProductID"])
+
+        with cols[1]:
+            applied_text = "<span style='color:green; font-weight:bold;'>(Applied)</span>" if is_applied else ""
+            st.markdown(
+                f"""
+                <div style='padding:15px; border-radius:10px; background-color:{bg_color}; margin-bottom:10px; border:1px solid #ccc;'>
+                    <div style='font-size:18px; font-weight:bold;'>{row['ProductName']} {applied_text}</div>
+                    <div style='margin-top:5px;'>
+                        <b>Our Price:</b> ₹{int(row['Our Price'])} &nbsp; → &nbsp;
+                        <b>AI Price:</b> ₹{int(row['AI Price'])}
+                    </div>
+                    <div style='margin-top:3px;'>
+                        <b>Confidence Score:</b> {row['Confidence Score']}% &nbsp; {"✅" if row['Confidence Score'] >= 70 else "⚠️"}
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+# Apply selected AI recommendations
+if apply_clicked and selected_ids:
+    for pid in selected_ids:
+        row = df[df["ProductID"] == pid].iloc[0]
+        ai_override_map[pid] = {
+            "product_id": pid,
+            "ai_price": float(row["AI Price"]),
+            "confidence": float(row["Confidence Score"]),
+            "OverrideType": "AI Recommended"
+        }
+
+    with open(AI_JSON_PATH, "w") as f:
+        json.dump(list(ai_override_map.values()), f, indent=2)
+
+    message_placeholder.success("✅ Applied selected AI Recommendations.")
+    st.rerun()
+
+# Revert selected AI overrides
+if revert_clicked and selected_ids:
+    for pid in selected_ids:
+        if pid in ai_override_map:
+            del ai_override_map[pid]
+
+    with open(AI_JSON_PATH, "w") as f:
+        json.dump(list(ai_override_map.values()), f, indent=2)
+
+    message_placeholder.warning("↩️ Reverted selected AI Recommendations.")
+    st.rerun()

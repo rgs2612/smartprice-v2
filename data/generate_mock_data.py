@@ -1,22 +1,44 @@
 import pandas as pd
+import random
+import uuid
 import numpy as np
 
-np.random.seed(42)
-brands = ["Samsung", "Apple", "OnePlus", "Nothing", "Google", "Motorola"]
+brands = ["Samsung", "Apple", "Xiaomi", "Realme", "OnePlus"]
 models = ["S23", "14", "Nord", "CMF 2", "Pixel 8", "Edge 40"]
 
-products = [f"{np.random.choice(brands)} {np.random.choice(models)}" for _ in range(100)]
+products = []
 
-df = pd.DataFrame({
-    "ProductName": products,
-    "TrendScore": np.random.randint(60, 100, size=100),
-    "Amazon Price": np.random.randint(30000, 80000, size=100),
-    "Flipkart Price": np.random.randint(30000, 80000, size=100),
-    "Croma Price": np.random.randint(30000, 80000, size=100)
-})
+# Generate 100 mock products
+for _ in range(100):
+    brand = random.choice(brands)
+    model = random.choice(models)
+    product_name = f"{brand} {model}"
+    product_id = str(uuid.uuid4())[:8]
+    price = random.randint(8000, 80000)
 
-# Your system price (before AI/rules)
-df["Our Price"] = (df["Amazon Price"] + df["Flipkart Price"] + df["Croma Price"]) // 3
+    product = {
+        "ProductID": product_id,
+        "ProductName": product_name,
+        "TrendScore": round(random.uniform(30, 100), 2),
+        "Stock Level": random.randint(0, 500),
+        "Demand": round(random.uniform(10, 100), 2),
+        "Amazon Price": random.randint(30000, 80000),
+        "Flipkart Price": random.randint(30000, 80000),
+        "Croma Price": random.randint(30000, 80000),
+        "Our Price": round(price, 2),
+        "Reason": "",
+        "override_applied": False
+    }
+    products.append(product)
 
+# Create DataFrame
+df = pd.DataFrame(products)
+
+# Compute derived fields
+df["Competitor Price"] = df[["Amazon Price", "Flipkart Price", "Croma Price"]].min(axis=1)
+df["Confidence Score"] = np.round(np.random.uniform(65, 99, size=len(df)) / 100, 2)
+df["Forecast Demand"] = df["Demand"] + np.random.randint(2, 15, size=len(df))
+
+# Save to Excel
 df.to_excel("data/mock_product_data.xlsx", index=False)
-print("✅ mock_product_data.xlsx generated!")
+print("✅ Mock data with ProductID saved.")

@@ -11,6 +11,7 @@ df = load_product_data()
 # Step 1: Product Selection
 product = st.selectbox("Select a product to override pricing", df["ProductName"])
 selected = df[df["ProductName"] == product].iloc[0]
+product_id = selected["ProductID"]  # Use ProductID as primary key
 
 # Step 2: Show current price
 st.markdown(f"**Current Price:** ₹{selected['Our Price']}")
@@ -30,7 +31,7 @@ start_date = st.date_input("🕒 Start Override On Date", value=datetime.now().d
 start_time_str = st.text_input("⏱️ Start Time (HH:MM)", value=datetime.now().strftime("%H:%M"))
 
 # Step 6: Expiry input
-expire_date = st.date_input("📅 Expire On Date", value=(datetime.now() + timedelta(days=1)).date())
+expire_date = st.date_input("🗓️ Expire On Date", value=(datetime.now() + timedelta(days=1)).date())
 expire_time_str = st.text_input("⏳ Expire Time (HH:MM)", value=(datetime.now() + timedelta(hours=4)).strftime("%H:%M"))
 
 # Step 7: Parse times and Submit
@@ -47,7 +48,8 @@ try:
             # Save override (scheduled, not immediate)
             overrides = load_scheduled_overrides()
             overrides.append({
-                "product": product,
+                "product_id": product_id,
+                "product_name": product,
                 "new_price": new_price,
                 "reason": final_reason,
                 "scheduled_for": scheduled_for.strftime("%Y-%m-%d %H:%M:%S"),
@@ -75,7 +77,7 @@ if not overrides:
     st.info("No overrides scheduled.")
 else:
     for i, item in reversed(list(enumerate(overrides))):
-        product_name = item.get("product")
+        product_name = item.get("product_name", "")
         price = item.get("new_price")
         reason = item.get("reason")
         scheduled = item.get("scheduled_for", "N/A")

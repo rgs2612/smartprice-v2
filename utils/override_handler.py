@@ -1,66 +1,53 @@
+# utils/override_handler.py
+
 import json
 from datetime import datetime
-from utils.rules_override_handler import load_rule_scheduled_overrides
 
-def apply_overrides(df):
-    now = datetime.now()
-
-    # Load manual overrides
+def load_scheduled_overrides():
     try:
         with open("data/scheduled_changes.json", "r") as f:
-            manual_overrides = json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError):
-        manual_overrides = []
-
-    # Load rule-based overrides
-    try:
-        rule_overrides = load_rule_scheduled_overrides()
-    except (FileNotFoundError, json.JSONDecodeError):
-        rule_overrides = []
-
-    all_overrides = manual_overrides + rule_overrides
-
-    # Track applied overrides
-    updated_rows = []
-
-    for override in all_overrides:
-        product = override.get("product")
-        new_price = override.get("new_price")
-        reason = override.get("reason", "Manual Override")
-
-        # Check expiration
-        try:
-            expires_on = datetime.strptime(override.get("expires_on"), "%Y-%m-%d %H:%M:%S")
-            if now > expires_on:
-                continue
-        except Exception:
-            continue  # Skip if invalid or missing date
-
-        # Apply override to matching product
-        for idx, row in df.iterrows():
-            if row.get("ProductName") == product:
-                df.at[idx, "Our Price"] = new_price
-                df.at[idx, "AI Price"] = new_price
-                df.at[idx, "Reason"] = reason
-                df.at[idx, "override_applied"] = True
-                updated_rows.append(idx)
-
-    # Ensure override_applied column exists
-    if "override_applied" not in df.columns:
-        df["override_applied"] = False
-
-    return df
-
-
-import json
-
-def load_scheduled_overrides(path="data/scheduled_changes.json"):
-    try:
-        with open(path, "r") as f:
-            return json.load(f)
+            overrides = json.load(f)
+        return overrides
     except (FileNotFoundError, json.JSONDecodeError):
         return []
 
-def save_scheduled_overrides(overrides, path="data/scheduled_changes.json"):
-    with open(path, "w") as f:
-        json.dump(overrides, f, indent=2)
+def save_scheduled_overrides(overrides):
+    with open("data/scheduled_changes.json", "w") as f:
+        json.dump(overrides, f, indent=4, default=str)
+        
+
+
+def apply_overrides(df):
+    try:
+        with open("data/scheduled_changes.json", "r") as f:
+            overrides = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return df
+
+    now = datetime.now()
+    updated_df = df.copy()
+
+    for override in overrides:
+        try:
+            product_id = override.get("product_id")
+            new_price = override.get("new_price")
+            scheduled_for_str = override.get("scheduled_for")
+            expires_on_str = override.get("expires_on")
+
+            # Skip if required datetime fields are missing
+            if not scheduled_for_str or not expires_on_str:
+                print(f"Skipping override for product ID {product_id}: missing schedule dates.")
+                continue
+
+            scheduled_for = datetime.strptime(scheduled_for_str, "%Y-%m-%d %H:%M:%S")
+            expires_on = datetime.strptime(expires_on_str, "%Y-%m-%d %H:%M:%S")
+
+            # Apply override if within schedule window
+            if scheduled_for <= now <= expires_on:
+                mask = updated_df["ProductID"] == product_id
+                updated_df.loc[mask, "Price"] = new_price
+                updated_df.loc[mask, "OverrideType"] = "Manual"
+        except Exception as e:
+            print(f"Error applying override for product ID {product_id}: {e}")
+
+    return updated_df

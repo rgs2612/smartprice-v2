@@ -9,6 +9,11 @@ def apply_rules(df: pd.DataFrame, rules: list) -> pd.DataFrame:
     scheduled_updates = []
     now = datetime.now()
 
+    # Ensure Reason column exists and is string type
+    if "Reason" not in df.columns:
+        df["Reason"] = ""
+    df["Reason"] = df["Reason"].astype(str)
+
     for rule in rules:
         try:
             # Rule metadata
@@ -81,14 +86,16 @@ def apply_rules(df: pd.DataFrame, rules: list) -> pd.DataFrame:
                         df.at[idx, "override_applied"] = True
                         changed_rows.append(idx)
 
-                        # Append to rule scheduler
-                        scheduled_updates.append({
-                            "product": row.get("ProductName"),
-                            "new_price": new_price,
-                            "reason": reason,
-                            "scheduled_for": now.strftime("%Y-%m-%d %H:%M:%S"),
-                            "expires_on": expires_on.strftime("%Y-%m-%d %H:%M:%S")
-                        })
+                        # Schedule override
+                        product_id = row.get("ProductID")
+                        if product_id:
+                            scheduled_updates.append({
+                                "product_id": product_id,
+                                "new_price": new_price,
+                                "reason": reason,
+                                "scheduled_for": now.strftime("%Y-%m-%d %H:%M:%S"),
+                                "expires_on": expires_on.strftime("%Y-%m-%d %H:%M:%S")
+                            })
 
         except Exception as e:
             st.warning(f"⚠️ Error applying rule: {e}")
@@ -97,7 +104,7 @@ def apply_rules(df: pd.DataFrame, rules: list) -> pd.DataFrame:
     if "override_applied" not in df.columns:
         df["override_applied"] = False
 
-    # Save rule-based scheduled overrides
+    # Save rule-based overrides
     if scheduled_updates:
         try:
             existing = load_rule_scheduled_overrides()

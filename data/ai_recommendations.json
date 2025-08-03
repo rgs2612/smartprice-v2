@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "ProductID": "12345",
+    "RecommendedPrice": 49999,
+    "Confidence Score": 0.95
+  },
+  {
+    "ProductID": "67890",
+    "RecommendedPrice": 27999,
+    "Confidence Score": 0.60
+  }
+]

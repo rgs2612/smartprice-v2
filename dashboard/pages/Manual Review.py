@@ -1,17 +1,51 @@
+import os
+import sys
+
+# Dynamically add project root to path
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if ROOT_DIR not in sys.path:
+    sys.path.insert(0, ROOT_DIR)
+
 import streamlit as st
 from datetime import datetime, timedelta
 from utils.data_loader import load_product_data
 from utils.overrides import save_override
 from utils.override_handler import load_scheduled_overrides, save_scheduled_overrides
+from utils.helpers import filter_products_needing_attention
 
+st.set_page_config(page_title="Manual Price Override", layout="wide")
 st.title("🛠️ Manual Price Override")
 
+# Load product data
 df = load_product_data()
 
-# Step 1: Product Selection
-product = st.selectbox("Select a product to override pricing", df["ProductName"])
-selected = df[df["ProductName"] == product].iloc[0]
-product_id = selected["ProductID"]  # Use ProductID as primary key
+# 🔽 Alert Type Filter Dropdown (Low AI Confidence removed)
+alert_filter = st.selectbox("Filter products by alert type", [
+    "🧊 All Issues",
+    "🔺 Price Gap Alert",
+    "📦 Low Stock Alert"
+])
+
+# ⚙️ Filter Function (Low AI Confidence filter removed)
+def get_alert_filtered_df(df, alert_type):
+    if alert_type == "🔺 Price Gap Alert":
+        return df[(abs(df["Our Price"] - df["Competitor Price"]) > 2000)]
+    elif alert_type == "📦 Low Stock Alert":
+        return df[df["Stock Level"] < 5]
+    else:  # All Issues
+        return filter_products_needing_attention(df)
+
+# 🔍 Apply selected filter
+filtered_df = get_alert_filtered_df(df, alert_filter)
+
+if filtered_df.empty:
+    st.success("✅ No products match the selected alert.")
+    st.stop()
+
+# Step 1: Product Selection (Filtered Only)
+product = st.selectbox("Select a product to override pricing", filtered_df["ProductName"])
+selected = filtered_df[filtered_df["ProductName"] == product].iloc[0]
+product_id = selected["ProductID"]
 
 # Step 2: Show current price
 st.markdown(f"**Current Price:** ₹{selected['Our Price']}")
@@ -45,7 +79,6 @@ try:
         if not final_reason:
             st.warning("⚠️ Please enter a reason for override.")
         else:
-            # Save override (scheduled, not immediate)
             overrides = load_scheduled_overrides()
             overrides.append({
                 "product_id": product_id,

@@ -1,0 +1,292 @@
+[2025-08-03 12:42:38] Scheduler started.
+[2025-08-03 12:42:38] Auto generation started.
+[2025-08-03 12:42:47] Scheduler started.
+[2025-08-03 12:42:47] Auto generation started.
+[2025-08-03 12:42:47] Mock data generated successfully.
+[2025-08-03 12:43:47] Auto generation started.
+[2025-08-03 12:43:47] Mock data generated successfully.
+[2025-08-03 12:44:08] Scheduler started.
+[2025-08-03 12:44:08] Auto generation started.
+[2025-08-03 12:44:08] Mock data generated successfully.
+[2025-08-03 12:44:47] Auto generation started.
+[2025-08-03 12:44:47] Mock data generated successfully.
+[2025-08-03 12:45:08] Auto generation started.
+[2025-08-03 12:45:08] Mock data generated successfully.
+[2025-08-03 12:45:47] Auto generation started.
+[2025-08-03 12:45:47] Mock data generated successfully.
+[2025-08-03 12:46:08] Auto generation started.
+[2025-08-03 12:46:08] Mock data generated successfully.
+[2025-08-03 12:46:47] Auto generation started.
+[2025-08-03 12:46:47] Mock data generated successfully.
+[2025-08-03 12:47:09] Auto generation started.
+[2025-08-03 12:47:09] Mock data generated successfully.
+[2025-08-03 12:47:47] Auto generation started.
+[2025-08-03 12:47:48] Mock data generated successfully.
+[2025-08-03 12:48:09] Auto generation started.
+[2025-08-03 12:48:09] Mock data generated successfully.
+[2025-08-03 12:48:48] Auto generation started.
+[2025-08-03 12:48:48] Mock data generated successfully.
+[2025-08-03 12:49:09] Auto generation started.
+[2025-08-03 12:49:09] Mock data generated successfully.
+[2025-08-03 12:49:48] Auto generation started.
+[2025-08-03 12:49:48] Mock data generated successfully.
+[2025-08-03 12:50:09] Auto generation started.
+[2025-08-03 12:50:09] Mock data generated successfully.
+[2025-08-03 12:50:48] Auto generation started.
+[2025-08-03 12:50:48] Mock data generated successfully.
+[2025-08-03 12:51:09] Auto generation started.
+[2025-08-03 12:51:09] Mock data generated successfully.
+[2025-08-03 12:51:48] Auto generation started.
+[2025-08-03 12:51:48] Mock data generated successfully.
+[2025-08-03 12:52:09] Auto generation started.
+[2025-08-03 12:52:09] Mock data generated successfully.
+[2025-08-03 12:52:48] Auto generation started.
+[2025-08-03 12:52:48] Mock data generated successfully.
+[2025-08-03 12:53:09] Auto generation started.
+[2025-08-03 12:53:09] Mock data generated successfully.
+[2025-08-03 12:53:48] Auto generation started.
+[2025-08-03 12:53:48] Mock data generated successfully.
+[2025-08-03 12:54:09] Auto generation started.
+[2025-08-03 12:54:09] Mock data generated successfully.
+[2025-08-03 12:54:48] Auto generation started.
+[2025-08-03 12:54:48] Mock data generated successfully.
+[2025-08-03 12:54:51] 🔄 Scheduler started.
+[2025-08-03 12:54:51] 🟢 Auto generation started.
+[2025-08-03 12:54:51] ✅ Mock data generated and saved to Excel.
+[2025-08-03 12:55:09] Auto generation started.
+[2025-08-03 12:55:10] Mock data generated successfully.
+[2025-08-03 12:55:48] Auto generation started.
+[2025-08-03 12:55:48] Mock data generated successfully.
+[2025-08-03 12:55:51] 🟢 Auto generation started.
+[2025-08-03 12:55:51] ✅ Mock data generated and saved to Excel.
+[2025-08-03 12:56:10] Auto generation started.
+[2025-08-03 12:56:10] Mock data generated successfully.
+[2025-08-03 12:56:48] Auto generation started.
+[2025-08-03 12:56:49] Mock data generated successfully.
+[2025-08-03 12:56:51] 🟢 Auto generation started.
+[2025-08-03 12:56:51] ✅ Mock data generated and saved to Excel.
+[2025-08-03 12:57:10] Auto generation started.
+[2025-08-03 12:57:10] Mock data generated successfully.
+[2025-08-03 12:57:49] Auto generation started.
+[2025-08-03 12:57:49] Mock data generated successfully.
+[2025-08-03 12:57:51] 🟢 Auto generation started.
+[2025-08-03 12:57:51] ✅ Mock data generated and saved to Excel.
+[2025-08-03 12:58:04] 🔄 Scheduler started.
+[2025-08-03 12:58:04] 🟢 Auto generation started.
+[2025-08-03 12:58:04] ✅ Mock data generated and saved to Excel.
+[2025-08-03 12:58:06] 🔄 Scheduler started.
+[2025-08-03 12:58:06] 🟢 Auto generation started.
+[2025-08-03 12:58:06] ✅ Mock data generated and saved to Excel.
+[2025-08-03 12:58:10] Auto generation started.
+[2025-08-03 12:58:10] Mock data generated successfully.
+[2025-08-03 12:59:50] 🔄 Scheduler started.
+[2025-08-03 12:59:50] 🟢 Auto generation started.
+[2025-08-03 12:59:50] ✅ Mock data generated and saved to Excel.
+[2025-08-03 13:00:14] 🔄 Scheduler started.
+[2025-08-03 13:00:14] 🟢 Auto generation started.
+[2025-08-03 13:00:14] ✅ Mock data generated and saved to Excel.
+[2025-08-03 13:00:50] 🟢 Auto generation started.
+[2025-08-03 13:00:51] ✅ Mock data generated and saved to Excel.
+[2025-08-03 13:01:14] 🟢 Auto generation started.
+[2025-08-03 13:01:14] ✅ Mock data generated and saved to Excel.
+[2025-08-03 13:01:51] 🟢 Auto generation started.
+[2025-08-03 13:01:51] ✅ Mock data generated and saved to Excel.
+[2025-08-03 13:02:14] 🟢 Auto generation started.
+[2025-08-03 13:02:15] ✅ Mock data generated and saved to Excel.
+[2025-08-03 13:02:51] 🟢 Auto generation started.
+[2025-08-03 13:02:51] ✅ Mock data generated and saved to Excel.
+[2025-08-03 13:03:15] 🟢 Auto generation started.
+[2025-08-03 13:03:15] ✅ Mock data generated and saved to Excel.
+[2025-08-03 13:03:18] 🔄 Scheduler started.
+[2025-08-03 13:03:18] 🛠️ Starting mock data generation...
+[2025-08-03 13:03:18] ✅ Mock product data updated.
+[2025-08-03 13:03:18] ✅ Generation complete. Sleeping...
+[2025-08-03 13:03:51] 🟢 Auto generation started.
+[2025-08-03 13:03:51] ✅ Mock data generated and saved to Excel.
+[2025-08-03 13:04:15] 🟢 Auto generation started.
+[2025-08-03 13:04:15] ✅ Mock data generated and saved to Excel.
+[2025-08-03 13:04:18] 🛠️ Starting mock data generation...
+[2025-08-03 13:04:18] ✅ Mock product data updated.
+[2025-08-03 13:04:18] ✅ Generation complete. Sleeping...
+[2025-08-03 13:04:51] 🟢 Auto generation started.
+[2025-08-03 13:04:51] ✅ Mock data generated and saved to Excel.
+[2025-08-03 13:05:15] 🟢 Auto generation started.
+[2025-08-03 13:05:15] ✅ Mock data generated and saved to Excel.
+[2025-08-03 13:05:18] 🛠️ Starting mock data generation...
+[2025-08-03 13:05:18] ✅ Mock product data updated.
+[2025-08-03 13:05:18] ✅ Generation complete. Sleeping...
+[2025-08-03 13:05:27] 🔄 Scheduler started.
+[2025-08-03 13:05:27] 🛠️ Starting mock data generation...
+[2025-08-03 13:05:27] ✅ Mock product data updated.
+[2025-08-03 13:05:27] ✅ Generation complete. Sleeping...
+[2025-08-03 13:05:44] 🔄 Scheduler started.
+[2025-08-03 13:05:44] 🛠️ Starting mock data generation...
+[2025-08-03 13:05:44] ✅ Mock product data updated.
+[2025-08-03 13:05:44] ✅ Generation complete. Sleeping...
+[2025-08-03 13:05:51] 🟢 Auto generation started.
+[2025-08-03 13:05:51] ✅ Mock data generated and saved to Excel.
+[2025-08-03 13:06:15] 🟢 Auto generation started.
+[2025-08-03 13:06:15] ✅ Mock data generated and saved to Excel.
+[2025-08-03 13:06:18] 🛠️ Starting mock data generation...
+[2025-08-03 13:06:18] ✅ Mock product data updated.
+[2025-08-03 13:06:18] ✅ Generation complete. Sleeping...
+[2025-08-03 13:15:27] 🛠️ Starting mock data generation...
+[2025-08-03 13:15:27] ✅ Mock product data updated.
+[2025-08-03 13:15:27] ✅ Generation complete. Sleeping...
+[2025-08-03 13:15:44] 🛠️ Starting mock data generation...
+[2025-08-03 13:15:44] ✅ Mock product data updated.
+[2025-08-03 13:15:44] ✅ Generation complete. Sleeping...
+[2025-08-03 13:15:51] 🟢 Auto generation started.
+[2025-08-03 13:15:51] ✅ Mock data generated and saved to Excel.
+[2025-08-03 13:16:15] 🟢 Auto generation started.
+[2025-08-03 13:16:15] ✅ Mock data generated and saved to Excel.
+[2025-08-03 13:16:18] 🛠️ Starting mock data generation...
+[2025-08-03 13:16:18] ✅ Mock product data updated.
+[2025-08-03 13:16:18] ✅ Generation complete. Sleeping...
+[2025-08-03 13:25:27] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:25:37] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:25:44] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:25:47] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:25:51] ⏸️ Scheduler sleeping (status = stopped).
+[2025-08-03 13:25:54] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:25:57] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:26:04] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:26:07] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:26:14] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:26:15] ⏸️ Scheduler sleeping (status = stopped).
+[2025-08-03 13:26:17] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:26:18] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:26:24] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:26:27] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:26:28] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:26:34] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:26:37] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:26:38] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:26:44] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:26:47] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:26:48] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:26:51] ⏸️ Scheduler sleeping (status = stopped).
+[2025-08-03 13:26:54] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:26:57] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:26:58] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:27:04] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:27:07] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:27:08] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:27:14] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:27:15] ⏸️ Scheduler sleeping (status = stopped).
+[2025-08-03 13:27:17] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:27:18] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:27:24] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:27:27] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:27:28] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:27:34] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:27:37] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:27:38] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:27:44] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:27:47] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:27:48] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:27:51] ⏸️ Scheduler sleeping (status = stopped).
+[2025-08-03 13:27:55] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:27:57] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:27:58] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:28:05] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:28:07] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:28:08] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:28:15] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:28:15] ⏸️ Scheduler sleeping (status = stopped).
+[2025-08-03 13:28:17] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:28:18] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:28:25] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:28:27] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:28:28] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:28:35] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:28:37] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:28:38] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:28:45] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:28:47] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:28:48] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:28:51] ⏸️ Scheduler sleeping (status = stopped).
+[2025-08-03 13:28:55] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:28:57] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:28:58] ⏸️ Scheduler sleeping (status: stopped).
+[2025-08-03 13:29:05] 🛠️ Starting mock data generation...
+[2025-08-03 13:29:05] ✅ Mock product data updated.
+[2025-08-03 13:29:05] ✅ Generation complete. Sleeping...
+[2025-08-03 13:29:07] 🛠️ Starting mock data generation...
+[2025-08-03 13:29:07] ✅ Mock product data updated.
+[2025-08-03 13:29:07] ✅ Generation complete. Sleeping...
+[2025-08-03 13:29:08] 🛠️ Starting mock data generation...
+[2025-08-03 13:29:08] ✅ Mock product data updated.
+[2025-08-03 13:29:08] ✅ Generation complete. Sleeping...
+[2025-08-03 13:29:15] 🟢 Auto generation started.
+[2025-08-03 13:29:15] ✅ Mock data generated and saved to Excel.
+[2025-08-03 13:38:51] 🟢 Auto generation started.
+[2025-08-03 13:38:51] ✅ Mock data generated and saved to Excel.
+[2025-08-03 13:39:05] 🛠️ Starting mock data generation...
+[2025-08-03 13:39:05] ✅ Mock product data updated.
+[2025-08-03 13:39:05] ✅ Generation complete. Sleeping...
+[2025-08-03 13:39:07] 🛠️ Starting mock data generation...
+[2025-08-03 13:39:07] ✅ Mock product data updated.
+[2025-08-03 13:39:07] ✅ Generation complete. Sleeping...
+[2025-08-03 13:39:08] 🛠️ Starting mock data generation...
+[2025-08-03 13:39:08] ✅ Mock product data updated.
+[2025-08-03 13:39:08] ✅ Generation complete. Sleeping...
+[2025-08-03 13:39:15] 🟢 Auto generation started.
+[2025-08-03 13:39:15] ✅ Mock data generated and saved to Excel.
+[2025-08-03 13:45:03] 🔁 Auto data scheduler started
+[2025-08-03 13:45:03] 🚀 Generating mock data...
+[2025-08-03 13:45:03] 📄 Mock data generated
+[2025-08-03 13:45:03] ✅ AI prices applied to 4 products
+[2025-08-03 13:45:03] ✅ Generation cycle completed
+[2025-08-03 13:48:51] 🟢 Auto generation started.
+[2025-08-03 13:48:51] ✅ Mock data generated and saved to Excel.
+[2025-08-03 13:49:00] 🔁 Auto data scheduler started
+[2025-08-03 13:49:00] 🚀 Generating mock data...
+[2025-08-03 13:49:00] 📄 Mock data generated
+[2025-08-03 13:49:00] ✅ AI prices applied to 2 products
+[2025-08-03 13:49:00] ✅ Generation cycle completed
+[2025-08-03 13:49:05] 🛠️ Starting mock data generation...
+[2025-08-03 13:49:05] ✅ Mock product data updated.
+[2025-08-03 13:49:05] ✅ Generation complete. Sleeping...
+[2025-08-03 13:49:07] 🛠️ Starting mock data generation...
+[2025-08-03 13:49:08] ✅ Mock product data updated.
+[2025-08-03 13:49:08] ✅ Generation complete. Sleeping...
+[2025-08-03 13:49:08] 🛠️ Starting mock data generation...
+[2025-08-03 13:49:09] ✅ Mock product data updated.
+[2025-08-03 13:49:09] ✅ Generation complete. Sleeping...
+[2025-08-03 13:49:15] 🟢 Auto generation started.
+[2025-08-03 13:49:15] ✅ Mock data generated and saved to Excel.
+[2025-08-03 13:55:03] 🚀 Generating mock data...
+[2025-08-03 13:55:03] 📄 Mock data generated
+[2025-08-03 13:55:03] ✅ AI prices applied to 4 products
+[2025-08-03 13:55:03] ✅ Generation cycle completed
+[2025-08-03 13:58:51] 🟢 Auto generation started.
+[2025-08-03 13:58:51] ✅ Mock data generated and saved to Excel.
+[2025-08-03 13:59:00] 🚀 Generating mock data...
+[2025-08-03 13:59:00] 📄 Mock data generated
+[2025-08-03 13:59:00] ✅ AI prices applied to 5 products
+[2025-08-03 13:59:00] ✅ Generation cycle completed
+[2025-08-03 13:59:05] 🛠️ Starting mock data generation...
+[2025-08-03 13:59:05] ✅ Mock product data updated.
+[2025-08-03 13:59:05] ✅ Generation complete. Sleeping...
+[2025-08-03 13:59:08] 🛠️ Starting mock data generation...
+[2025-08-03 13:59:08] ✅ Mock product data updated.
+[2025-08-03 13:59:08] ✅ Generation complete. Sleeping...
+[2025-08-03 13:59:09] 🛠️ Starting mock data generation...
+[2025-08-03 13:59:09] ✅ Mock product data updated.
+[2025-08-03 13:59:09] ✅ Generation complete. Sleeping...
+[2025-08-03 13:59:15] 🟢 Auto generation started.
+[2025-08-03 13:59:15] ✅ Mock data generated and saved to Excel.
+[2025-08-03 14:34:33] ✅ Mock data generated and eligible AI prices applied.
+[2025-08-03 14:34:43] ✅ Mock data generated and eligible AI prices applied.
+[2025-08-03 14:35:53] ✅ Mock data generated and eligible AI prices applied.
+[2025-08-03 14:44:16] ✅ Mock data generated and overrides applied.
+[2025-08-03 14:44:40] ✅ Mock data generated and overrides applied.
+[2025-08-03 14:47:06] ✅ Mock data generated and overrides applied.
+[2025-08-03 14:47:19] ✅ Mock data generated and overrides applied.
+[2025-08-03 14:51:31] ✅ AI Recommendations applied for 2 products.
+[2025-08-03 14:51:31] ✅ AI Recommendations applied for 1 products.
+[2025-08-03 14:51:31] ✅ Rule-Based Overrides applied for 289 products.
+[2025-08-03 14:51:31] ✅ Rule-Based Overrides applied for 289 products.
+[2025-08-03 14:51:31] ✅ Final data written to Excel.
+[2025-08-03 14:51:31] ✅ Final data written to Excel.

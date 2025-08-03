@@ -1,1 +1,37 @@
-[]
+[
+  {
+    "product_id": "a3c9e17a",
+    "product_name": "OnePlus Nord",
+    "ai_price": 38940.96,
+    "confidence": 0.88,
+    "OverrideType": "AI Recommended"
+  },
+  {
+    "product_id": "53f893e9",
+    "product_name": "Apple Nord",
+    "ai_price": 32224.51,
+    "confidence": 0.86,
+    "OverrideType": "AI Recommended"
+  },
+  {
+    "product_id": "f37819e2",
+    "product_name": "Apple 14",
+    "ai_price": 48273.08,
+    "confidence": 0.73,
+    "OverrideType": "AI Recommended"
+  },
+  {
+    "product_id": "3d7fe79a",
+    "product_name": "Xiaomi Nord",
+    "ai_price": 67388.83,
+    "confidence": 0.77,
+    "OverrideType": "AI Recommended"
+  },
+  {
+    "product_id": "fae14961",
+    "product_name": "Samsung Pixel 8",
+    "ai_price": 34871.09,
+    "confidence": 0.7,
+    "OverrideType": "AI Recommended"
+  }
+]

@@ -4,118 +4,153 @@ import joblib
 import os
 import json
 
-# File paths
+st.set_page_config(page_title="🤖 AI Pricing Recommendations", layout="wide")
+st.title("🤖 AI Pricing Recommendations")
+
+# --- File Paths ---
 DATA_PATH = "data/mock_product_data.xlsx"
 MODEL_PATH = "ai/ai_price_model.pkl"
 AI_JSON_PATH = "data/ai_scheduled.json"
 
-st.set_page_config(page_title="🤖 AI Pricing Recommendations", layout="wide")
-st.title("🤖 AI Pricing Recommendations")
-
-# Load product data
+# --- Load Data ---
 df = pd.read_excel(DATA_PATH)
-
-# Load AI model
 model = joblib.load(MODEL_PATH)
 
-# Predict AI Price & Confidence
+# --- Generate AI Predictions ---
 features = ["TrendScore", "Stock Level", "Demand", "Competitor Price"]
 df["AI Price"] = model.predict(df[features]).round(2)
-df["Confidence Score"] = (100 - abs(df["AI Price"] - df["Competitor Price"]) / df["Competitor Price"] * 100).round(2)
+df["Price Gap"] = abs(df["Competitor Price"] - df["Our Price"])
 
-# Load existing AI overrides
+# --- Load Existing AI Overrides ---
 if os.path.exists(AI_JSON_PATH):
     with open(AI_JSON_PATH, "r") as f:
-        ai_overrides = json.load(f)
+        try:
+            raw_data = json.load(f)
+            ai_overrides = [o for o in raw_data if isinstance(o, dict) and "product_id" in o]
+        except json.JSONDecodeError:
+            ai_overrides = []
 else:
     ai_overrides = []
 
-# Mapping for fast lookup
-ai_override_map = {entry["product_id"]: entry for entry in ai_overrides}
+applied_ids = [o.get("product_id") for o in ai_overrides]
 
-# Set override types
-df["OverrideType"] = df["ProductID"].apply(
-    lambda x: "AI Recommended" if x in ai_override_map else None
-)
+# --- Auto-Apply Eligible AI Recommendations ---
+def is_eligible_auto_apply(row):
+    return (
+        row["Confidence Score"] >= 0.70 and
+        row["Price Gap"] <= 2000 and
+        row["Stock Level"] >= 5
+    )
 
-# Filter out products already overridden by Manual or Rule-Based (if needed)
-excluded_ids = set()
-# You can load manual/rule overrides and add to excluded_ids if needed
+df["EligibleForAutoApply"] = df.apply(is_eligible_auto_apply, axis=1)
 
-# Filter: Only products not already manually or rule overridden
-filtered_df = df[~df["ProductID"].isin(excluded_ids)].copy()
-
-
-
-st.markdown("---")
-st.subheader("📋 AI Price Suggestions")
-
-# Placeholder for dynamic messages
-message_placeholder = st.empty()
-
-# Sticky controls
-col1, col2, col3 = st.columns(3)
-select_all = col1.checkbox("✅ Select All", key="select_all_ai")
-apply_clicked = col2.button("🚀 Apply Selected", key="apply_ai")
-revert_clicked = col3.button("↩️ Revert Selected", key="revert_ai")
-
-# State storage
-selected_ids = []
-
-# Show AI Recommendations
-for _, row in filtered_df.iterrows():
-    is_applied = row["ProductID"] in ai_override_map
-    bg_color = "#dcfce7" if is_applied else ("#fff3cd" if row["Confidence Score"] < 70 else "#e0f7fa")
-
-    with st.container():
-        cols = st.columns([0.07, 0.93])
-        checked = select_all or cols[0].checkbox("", key=f"chk_{row['ProductID']}")
-        if checked:
-            selected_ids.append(row["ProductID"])
-
-        with cols[1]:
-            applied_text = "<span style='color:green; font-weight:bold;'>(Applied)</span>" if is_applied else ""
-            st.markdown(
-                f"""
-                <div style='padding:15px; border-radius:10px; background-color:{bg_color}; margin-bottom:10px; border:1px solid #ccc;'>
-                    <div style='font-size:18px; font-weight:bold;'>{row['ProductName']} {applied_text}</div>
-                    <div style='margin-top:5px;'>
-                        <b>Our Price:</b> ₹{int(row['Our Price'])} &nbsp; → &nbsp;
-                        <b>AI Price:</b> ₹{int(row['AI Price'])}
-                    </div>
-                    <div style='margin-top:3px;'>
-                        <b>Confidence Score:</b> {row['Confidence Score']}% &nbsp; {"✅" if row['Confidence Score'] >= 70 else "⚠️"}
-                    </div>
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
-
-# Apply selected AI recommendations
-if apply_clicked and selected_ids:
-    for pid in selected_ids:
-        row = df[df["ProductID"] == pid].iloc[0]
-        ai_override_map[pid] = {
-            "product_id": pid,
+# Auto-apply if not already applied
+for _, row in df[df["EligibleForAutoApply"]].iterrows():
+    if row["ProductID"] not in applied_ids:
+        ai_overrides.append({
+            "product_id": row["ProductID"],
+            "product_name": row["ProductName"],
             "ai_price": float(row["AI Price"]),
             "confidence": float(row["Confidence Score"]),
             "OverrideType": "AI Recommended"
-        }
+        })
 
+# Save updated override list
+with open(AI_JSON_PATH, "w") as f:
+    json.dump(ai_overrides, f, indent=2)
+
+# --- Mark Applied ---
+df["Applied"] = df["ProductID"].isin([o.get("product_id") for o in ai_overrides])
+df["OverrideType"] = df["Applied"].apply(lambda x: "AI Recommended" if x else None)
+
+# --- Filter UI ---
+st.markdown("### 🔍 Filter Recommendations")
+category = st.selectbox("Select Filter", ["Low Confidence", "Low Stock", "Price Gap > ₹2000", "High Confidence"])
+
+def filter_by_category(df, category):
+    if category == "Low Confidence":
+        return df[df["Confidence Score"] < 0.70]
+    elif category == "Low Stock":
+        return df[df["Stock Level"] < 5]
+    elif category == "Price Gap > ₹2000":
+        return df[df["Price Gap"] > 2000]
+    elif category == "High Confidence":
+        return df[
+            (df["Confidence Score"] >= 0.70) &
+            (df["Stock Level"] >= 5) &
+            (df["Price Gap"] <= 2000)
+        ]
+    return df
+
+filtered_df = filter_by_category(df.copy(), category)
+
+# --- UI: Apply / Revert ---
+selected_ids = []
+
+if category != "High Confidence":
+    select_all = st.checkbox("✅ Select All", key="select_all_main")
+    col_apply, col_revert = st.columns([1, 1])
+    with col_apply:
+        apply_clicked = st.button("🚀 Apply Selected")
+    with col_revert:
+        revert_clicked = st.button("↩️ Revert Selected")
+else:
+    # If hiding buttons, we still need to define these for logic below
+    apply_clicked = False
+    revert_clicked = False
+    select_all = False  # Prevent preselecting checkboxes
+
+
+# --- Product Cards ---
+for _, row in filtered_df.iterrows():
+    pid = row["ProductID"]
+    is_applied = row["Applied"]
+    needs_review = row["Confidence Score"] < 0.70 or row["Stock Level"] < 5 or row["Price Gap"] > 2000
+    bg_color = "#dcfce7" if is_applied else ("#fff3cd" if needs_review else "#e0f7fa")
+
+    with st.container():
+        cols = st.columns([0.05, 0.95])
+        if category != "High Confidence":
+            checked = select_all or cols[0].checkbox("", key=f"chk_{pid}")
+        else:
+            checked = False
+            cols[0].markdown("")  # leave the space empty
+
+        if checked:
+            selected_ids.append(pid)
+
+        with cols[1]:
+            st.markdown(f"""
+                <div style='padding:10px; border:1px solid #ccc; border-radius:10px; background:{bg_color}; margin-bottom:10px;'>
+                    <b>{row['ProductName']}</b> ({'<span style="color:green;">Applied</span>' if is_applied else 'Not Applied'})<br>
+                    💰 Our Price: ₹{int(row['Our Price'])} → AI Price: ₹{int(row['AI Price'])}<br>
+                    🎯 Confidence: {row['Confidence Score']*100:.0f}% {'✅' if row['Confidence Score'] >= 0.70 else '⚠️'} 
+                    💸 Price Gap: ₹{int(row['Price Gap'])} {'⚠️' if row['Price Gap'] > 2000 else ''} 
+                    📦 Stock: {int(row['Stock Level'])} {'🔻' if row['Stock Level'] < 5 else ''}
+                </div>
+            """, unsafe_allow_html=True)
+
+# --- Apply Selected ---
+if apply_clicked:
+    for pid in selected_ids:
+        row = df[df["ProductID"] == pid].iloc[0]
+        ai_overrides = [o for o in ai_overrides if o.get("product_id") != pid]
+        ai_overrides.append({
+            "product_id": pid,
+            "product_name": row["ProductName"],
+            "ai_price": float(row["AI Price"]),
+            "confidence": float(row["Confidence Score"]),
+            "OverrideType": "AI Recommended"
+        })
     with open(AI_JSON_PATH, "w") as f:
-        json.dump(list(ai_override_map.values()), f, indent=2)
-
-    message_placeholder.success("✅ Applied selected AI Recommendations.")
+        json.dump(ai_overrides, f, indent=2)
+    st.success("✅ Selected AI Recommendations Applied.")
     st.rerun()
 
-# Revert selected AI overrides
-if revert_clicked and selected_ids:
-    for pid in selected_ids:
-        if pid in ai_override_map:
-            del ai_override_map[pid]
-
+# --- Revert Selected ---
+if revert_clicked:
+    ai_overrides = [o for o in ai_overrides if o.get("product_id") not in selected_ids]
     with open(AI_JSON_PATH, "w") as f:
-        json.dump(list(ai_override_map.values()), f, indent=2)
-
-    message_placeholder.warning("↩️ Reverted selected AI Recommendations.")
+        json.dump(ai_overrides, f, indent=2)
+    st.warning("↩️ Selected AI Recommendations Reverted.")
     st.rerun()

@@ -1,93 +1,96 @@
+# pages/Notifications.py
 import streamlit as st
 import pandas as pd
 import os
 import json
-from utils.override_handler import load_scheduled_overrides
-from utils.rules_override_handler import load_rule_scheduled_overrides
+from utils.action_generator import generate_action
 
-st.set_page_config(page_title="Monitoring", layout="wide")
-st.title("📊 AI Monitoring Dashboard")
+st.set_page_config(page_title="Notifications", page_icon="🔔")
+st.title("📣 Smart Pricing Notifications")
+st.markdown("Real-time alerts generated from AI monitoring logic.")
 
-# Load data
+# File paths
 DATA_PATH = "data/mock_product_data.xlsx"
-RECOMMENDATION_LOG = "data/scheduled_changes.json"
+MANUAL_OVERRIDE_PATH = "data/scheduled_changes.json"
+RULE_OVERRIDE_PATH = "data/rule_scheduled_changes.json"
+AI_OVERRIDE_PATH = "data/ai_scheduled.json"
 
-# --- Load Product Data
-if os.path.exists(DATA_PATH):
-    df = pd.read_excel(DATA_PATH)
-else:
-    st.error("❌ Product data file not found.")
+# Load product data
+if not os.path.exists(DATA_PATH):
+    st.warning("Product data not found.")
     st.stop()
 
-# --- Load Scheduled AI Changes
-scheduled_changes = []
-if os.path.exists(RECOMMENDATION_LOG):
-    try:
-        with open(RECOMMENDATION_LOG, "r") as f:
-            scheduled_changes = json.load(f)
-    except json.JSONDecodeError:
-        scheduled_changes = []
+df = pd.read_excel(DATA_PATH)
 
-# --- Section: Recent AI Price Changes
-st.subheader("📈 Recently Scheduled AI Price Changes")
-manual = load_scheduled_overrides()
-rule_based = load_rule_scheduled_overrides()
+# Price gap
+df["Price Gap"] = abs(df["Our Price"] - df["Competitor Price"])
 
-# Combine both with a label
-for m in manual:
-    m["type"] = "Manual"
-for r in rule_based:
-    r["type"] = "Rule"
+# Required columns
+required_cols = ["ProductID", "ProductName", "Stock Level", "Confidence Score", "Competitor Price", "Our Price"]
+for col in required_cols:
+    if col not in df.columns:
+        st.error(f"Missing required column: **{col}**")
+        st.stop()
 
-combined = manual + rule_based
+# Load overrides safely
+def load_json(path):
+    if os.path.exists(path):
+        with open(path, "r") as f:
+            try:
+                return json.load(f)
+            except:
+                return []
+    return []
 
-if combined:
-    df_combined = pd.DataFrame(combined)
-    display_cols = ["product", "new_price", "reason", "scheduled_for", "expires_on", "type"]
-    df_combined = df_combined[display_cols] if all(col in df_combined.columns for col in display_cols) else df_combined
-    df_combined = df_combined.sort_values("scheduled_for", ascending=False)
-    st.dataframe(df_combined, use_container_width=True)
+manual_overrides = load_json(MANUAL_OVERRIDE_PATH)
+rule_overrides = load_json(RULE_OVERRIDE_PATH)
+ai_overrides = load_json(AI_OVERRIDE_PATH)
+
+# Prepare a mapping: ProductID -> Action Taken
+action_taken_map = {}
+
+for o in manual_overrides:
+    pid = o.get("product_id")
+    if pid: action_taken_map[pid] = "Manual Override"
+
+for o in rule_overrides:
+    pid = o.get("product_id")
+    if pid: action_taken_map[pid] = "Rule-Based Override"
+
+for o in ai_overrides:
+    pid = o.get("product_id")
+    if pid: action_taken_map[pid] = "AI Recommended"
+
+# Add column to df
+df["Action Taken"] = df["ProductID"].apply(lambda pid: action_taken_map.get(pid, "None"))
+
+# Apply AI logic-based action recommendations
+df = generate_action(df)
+
+# --- Sections ---
+st.subheader("🔻 Low Stock Alerts (< 5 units)")
+low_stock = df[df["Stock Level"] < 5]
+if not low_stock.empty:
+    st.error("The following products are critically low on stock:")
+    st.dataframe(low_stock[["ProductID", "ProductName", "Stock Level", "Action", "Action Taken"]])
 else:
-    st.info("No recent price changes scheduled.")
+    st.success("✅ All products have sufficient stock.")
 
-# --- Section: Outlier Pricing Detection
-st.subheader("🚨 Price Outlier Detection")
-
-# Add derived competitor average
-df["Competitor Price"] = df[["Amazon Price", "Flipkart Price", "Croma Price"]].mean(axis=1)
-
-outliers = df[df["Our Price"] > df["Competitor Price"] * 1.5]
-if not outliers.empty:
-    st.error("Some prices are unusually high compared to competitors!")
-    st.dataframe(outliers)
+st.subheader("⚠️ Price Gap Alerts (> ₹2000 difference)")
+price_gap = df[df["Price Gap"] > 2000]
+if not price_gap.empty:
+    st.warning("These products have a large price difference with competitors:")
+    st.dataframe(price_gap[["ProductID", "ProductName", "Competitor Price", "Our Price", "Price Gap", "Action", "Action Taken"]])
 else:
-    st.success("✅ No major price outliers found.")
+    st.success("✅ No large price mismatches detected.")
 
-# --- Section: AI Confidence Score Check
-if "Confidence Score" in df.columns:
-    st.subheader("🧠 AI Confidence Monitoring")
+st.subheader("🤖 Low AI Confidence (< 70%)")
+low_confidence = df[df["Confidence Score"] < 0.70]
+if not low_confidence.empty:
+    st.info("These products have low model confidence. Manual review recommended:")
+    st.dataframe(low_confidence[["ProductID", "ProductName", "Confidence Score", "Action", "Action Taken"]])
+else:
+    st.success("✅ All predictions have high confidence.")
 
-    low_conf = df[df["Confidence Score"] < 0.7]
-    if not low_conf.empty:
-        st.warning("⚠️ Low-confidence predictions need review:")
-        st.dataframe(low_conf)
-    else:
-        st.success("✅ All AI price predictions have acceptable confidence.")
-
-# --- Section: Summary Stats
-st.subheader("📊 Dashboard Metrics")
-
-col1, col2, col3 = st.columns(3)
-
-col1.metric("Total Products", len(df))
-col2.metric("Outlier Prices", len(outliers))
-col3.metric("Low Confidence", len(df[df.get("Confidence Score", 1) < 0.7]))
-
-# --- Optional: Visual Insights (if needed)
 st.markdown("---")
-st.subheader("📉 Price vs Competitor Price Chart")
-
-try:
-    st.line_chart(df[["Our Price", "Competitor Price"]])
-except:
-    st.info("Price chart requires numeric data to plot.")
+st.markdown("✅ **Smart alerts help you stay ahead of risks and pricing mismatches.**")

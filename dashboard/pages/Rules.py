@@ -126,3 +126,68 @@ if st.session_state.rules:
         st.dataframe(display_df)
     else:
         st.info("ℹ️ No product prices were changed by the current rules.")
+        # --- Show Active Scheduled Rule-Based Overrides ---
+        st.markdown("## 📌 Currently Active Rule-Based Overrides")
+
+        # Load existing scheduled rule-based overrides
+        rule_overrides = load_rule_scheduled_overrides()
+
+        # Ensure OverrideType is of object type for compatibility
+        df["OverrideType"] = df.get("OverrideType", pd.Series(dtype="object"))
+
+        # Apply active rule-based overrides to df
+        now = datetime.now()
+        product_ids = df["ProductID"].tolist()
+
+        for override in rule_overrides:
+            # Normalize keys
+            pid = override.get("ProductID") or override.get("product_id")
+            new_price = override.get("NewPrice") or override.get("new_price")
+            reason = override.get("Reason") or "Rule Triggered"
+            start_str = override.get("StartDate") or override.get("scheduled_for")
+            end_str = override.get("EndDate") or override.get("expires_on")
+
+            # Skip if product not found
+            if pid not in product_ids:
+                st.warning(f"❌ ProductID not found in data: {pid}")
+                continue
+
+            # Skip if dates are missing
+            if not start_str or not end_str:
+                st.warning(f"⚠️ Missing dates in override for {pid}")
+                continue
+
+            # Try parsing date formats
+            try:
+                start_date = datetime.strptime(start_str, "%Y-%m-%d %H:%M:%S")
+                end_date = datetime.strptime(end_str, "%Y-%m-%d %H:%M:%S")
+            except ValueError:
+                try:
+                    start_date = datetime.strptime(start_str, "%Y-%m-%d")
+                    end_date = datetime.strptime(end_str, "%Y-%m-%d")
+                except ValueError:
+                    st.warning(f"⛔ Invalid date format for {pid}")
+                    continue
+
+            if start_date <= now <= end_date:
+                st.success(f"✅ Applying Rule-Based override for {pid}")
+                mask = df["ProductID"] == pid
+                df.loc[mask, "Our Price"] = new_price
+                df.loc[mask, "OverrideType"] = "Rule-Based"
+                df.loc[mask, "Reason"] = reason
+
+
+
+
+
+        # Filter active rule-based overrides
+        active_rule_products = df[df["OverrideType"] == "Rule-Based"]
+
+        if not active_rule_products.empty:
+            display_cols = [
+                "ProductName", "Our Price", "Competitor Price", "Stock Level", "Demand", "Reason"
+            ]
+            st.dataframe(active_rule_products[[col for col in display_cols if col in active_rule_products.columns]])
+        else:
+            st.info("No active rule-based overrides currently applied.")
+

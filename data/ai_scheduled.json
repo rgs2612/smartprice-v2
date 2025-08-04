@@ -1,37 +1,30 @@
 [
   {
-    "product_id": "8f133de7",
-    "product_name": "OnePlus Pixel 8",
-    "ai_price": 36153.9,
-    "confidence": 0.74,
+    "product_id": "16d0a6db",
+    "product_name": "Samsung Pixel 8",
+    "ai_price": 46725.18,
+    "confidence": 0.85,
     "OverrideType": "AI Recommended (Auto)"
   },
   {
-    "product_id": "331b5a89",
+    "product_id": "53ab4f53",
     "product_name": "Samsung 14",
-    "ai_price": 41028.48,
-    "confidence": 0.88,
+    "ai_price": 32291.16,
+    "confidence": 0.89,
     "OverrideType": "AI Recommended (Auto)"
   },
   {
-    "product_id": "e8d939d9",
-    "product_name": "Samsung 14",
-    "ai_price": 37768.5,
-    "confidence": 0.75,
+    "product_id": "fdd80d69",
+    "product_name": "Samsung Edge 40",
+    "ai_price": 75381.6,
+    "confidence": 0.72,
     "OverrideType": "AI Recommended (Auto)"
   },
   {
-    "product_id": "26e38cb5",
-    "product_name": "Apple S23",
-    "ai_price": 56502.6,
-    "confidence": 0.92,
-    "OverrideType": "AI Recommended (Auto)"
-  },
-  {
-    "product_id": "3e51d4dd",
-    "product_name": "Xiaomi Pixel 8",
-    "ai_price": 38664.12,
-    "confidence": 0.95,
+    "product_id": "82e41800",
+    "product_name": "Samsung Nord",
+    "ai_price": 32565.54,
+    "confidence": 0.79,
     "OverrideType": "AI Recommended (Auto)"
   }
 ]

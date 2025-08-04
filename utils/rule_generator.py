@@ -19,7 +19,8 @@ def generate_rule_based_overrides(df):
                 "product_id": pid,
                 "new_price": new_price,
                 "scheduled_for": now.strftime("%Y-%m-%d %H:%M:%S"),
-                "expires_on": expires.strftime("%Y-%m-%d %H:%M:%S")
+                "expires_on": expires.strftime("%Y-%m-%d %H:%M:%S"),
+                "OverrideType": "Rule-Based"
             })
 
     # Save to file

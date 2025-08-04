@@ -89,6 +89,7 @@ def apply_all_overrides(df):
                 )
                 df.loc[mask, "Price"] = new_price
                 df.loc[mask, "Our Price"] = round(new_price)
+                df["OverrideType"] = df["OverrideType"].astype("object")
                 df.loc[mask, "OverrideType"] = "Rule-Based"
                 applied["Rule-Based"] += df.loc[mask].shape[0]
         except Exception as e:

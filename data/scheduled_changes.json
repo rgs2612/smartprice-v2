@@ -1,1 +1,10 @@
-[]
+[
+    {
+        "product_id": "b47bf37e",
+        "product_name": "Realme S23",
+        "new_price": 20142,
+        "reason": "Brand positioning",
+        "scheduled_for": "2025-08-05 00:22:00",
+        "expires_on": "2025-08-06 04:22:00"
+    }
+]

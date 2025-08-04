@@ -1,218 +1,282 @@
 [
   {
-    "product_id": "87164b04",
-    "new_price": 45270.12,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "3e7727bc",
+    "new_price": 33991.3,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "d54e27e0",
-    "new_price": 30598.54,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "0c87ac52",
+    "new_price": 33119.1,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "b8906b65",
-    "new_price": 31932.32,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "a0f5efaf",
+    "new_price": 44631.16,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "3e72c072",
-    "new_price": 39817.4,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "ce136f14",
+    "new_price": 42395.78,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "194b50ce",
-    "new_price": 44529.24,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "61bb9b6b",
+    "new_price": 54667.34,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "bbc220e4",
-    "new_price": 35277.06,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "bd710456",
+    "new_price": 44920.26,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "b89c60f1",
-    "new_price": 33724.74,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "3cf3038b",
+    "new_price": 34075.58,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "4e5e9962",
-    "new_price": 34880.16,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "a64f472e",
+    "new_price": 29490.16,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "59505669",
-    "new_price": 48874.56,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "6580a0f7",
+    "new_price": 44096.08,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "64ac0db3",
-    "new_price": 30294.74,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "d0a165bd",
+    "new_price": 31843.14,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "4469fede",
-    "new_price": 33875.66,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "c15426e4",
+    "new_price": 33859.0,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "0d41975d",
-    "new_price": 30167.34,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "908b26f1",
+    "new_price": 55300.42,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "188ecac6",
-    "new_price": 36968.54,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "e54090ed",
+    "new_price": 38950.1,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "ece4051a",
-    "new_price": 30533.86,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "d64bcad3",
+    "new_price": 61474.42,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "6b56438a",
-    "new_price": 30777.88,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "dbd04758",
+    "new_price": 30456.44,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "1e3bf9ea",
-    "new_price": 35826.84,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "b66544f2",
+    "new_price": 30153.62,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "664f8336",
-    "new_price": 45774.82,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "8f0f9c78",
+    "new_price": 32056.78,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "83c1229d",
-    "new_price": 33771.78,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "688c3b9f",
+    "new_price": 50320.06,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "112de73a",
-    "new_price": 32389.98,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "c776197b",
+    "new_price": 42940.66,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "86a2e61e",
-    "new_price": 29699.88,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "c5ed9e64",
+    "new_price": 33333.72,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "050fe045",
-    "new_price": 36482.46,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "28ec7d9d",
+    "new_price": 34727.28,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "c3ffbced",
-    "new_price": 33878.6,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "f315abe1",
+    "new_price": 36069.88,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "e01af7c7",
-    "new_price": 30739.66,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "39ffa08a",
+    "new_price": 36806.84,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "46ffe27e",
-    "new_price": 31119.9,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "30b83482",
+    "new_price": 49261.66,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "abac1f89",
-    "new_price": 32255.72,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "ded3e69e",
+    "new_price": 33153.4,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "862a340f",
-    "new_price": 36359.96,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "ac53b3e2",
+    "new_price": 43576.68,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "e4b6acf6",
-    "new_price": 58943.08,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "cfe9f81e",
+    "new_price": 33353.32,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "62b4a019",
-    "new_price": 44166.64,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "fd38f23c",
+    "new_price": 59543.82,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "43282893",
-    "new_price": 30864.12,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "33a84829",
+    "new_price": 33997.18,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "919637e3",
-    "new_price": 48469.82,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "1efd635f",
+    "new_price": 58468.76,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "42cb68b8",
-    "new_price": 33048.54,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "d815bd6b",
+    "new_price": 35721.98,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "844e77ad",
-    "new_price": 31057.18,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "33dbe531",
+    "new_price": 34130.46,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "787a823c",
-    "new_price": 37480.1,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "ccd5b755",
+    "new_price": 31563.84,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "09512998",
-    "new_price": 44749.74,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "8c146d59",
+    "new_price": 42741.72,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "4a46d5e4",
-    "new_price": 42394.8,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "71b17327",
+    "new_price": 31702.02,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   },
   {
-    "product_id": "282eca91",
-    "new_price": 50940.4,
-    "scheduled_for": "2025-08-04 23:07:48",
-    "expires_on": "2025-08-11 23:07:48"
+    "product_id": "32189390",
+    "new_price": 31282.58,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
+  },
+  {
+    "product_id": "86e8941f",
+    "new_price": 29824.34,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
+  },
+  {
+    "product_id": "b4cbd920",
+    "new_price": 31235.54,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
+  },
+  {
+    "product_id": "e7b914a3",
+    "new_price": 35470.12,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
+  },
+  {
+    "product_id": "0eb9f19f",
+    "new_price": 54761.42,
+    "scheduled_for": "2025-08-05 00:21:57",
+    "expires_on": "2025-08-12 00:21:57",
+    "OverrideType": "Rule-Based"
   }
 ]
